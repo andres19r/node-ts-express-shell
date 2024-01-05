@@ -1,5 +1,5 @@
 import { UserModel } from "../../data";
-import { CustomError, RegisterUserDto } from "../../domain";
+import { CustomError, RegisterUserDto, UserEntity } from "../../domain";
 
 export class AuthService {
   constructor() {}
@@ -8,6 +8,23 @@ export class AuthService {
     const existUser = await UserModel.findOne({ email: registerUserDto.email });
     if (existUser) throw CustomError.badRequest("Email already exist");
 
-    return "ok";
+    try {
+      const user = new UserModel(registerUserDto);
+      await user.save();
+
+      // Encript password
+
+      // JWT - user authentication
+
+      // Confirmation email
+
+      const { password, ...userEntity } = UserEntity.fromObject(user);
+      return {
+        user: userEntity,
+        token: "ABC",
+      };
+    } catch (error) {
+      throw CustomError.internalServer(`${error}`);
+    }
   }
 }
