@@ -26,9 +26,10 @@ export class AuthService {
       // Confirmation email
 
       const { password, ...userEntity } = UserEntity.fromObject(user);
+      const token = await JwtAdapter.generateToken({ id: user.id });
       return {
         user: userEntity,
-        token: "ABC",
+        token,
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
