@@ -23,10 +23,7 @@ export class FileUploadController {
         .status(400)
         .json({ error: `Invalid type: ${type}, valid ones ${validTypes}` });
 
-    if (!req.files || Object.keys(req.files).length === 0)
-      return res.status(400).json({ error: "No files where selected" });
-
-    const file = req.files.file as UploadedFile;
+    const file = req.body.files.at(0) as UploadedFile;
     this.fileUploadService
       .uploadSingle(file, `uploads/${type}`)
       .then((uploaded) => res.json(uploaded))
