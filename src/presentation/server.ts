@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import cors from "cors";
 import fileUpload from "express-fileupload";
 import path from "path";
 
@@ -24,6 +25,7 @@ export class Server {
 
   async start() {
     //* Middlewares
+    this.app.use(cors());
     this.app.use(express.json()); // raw
     this.app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded
     this.app.use(
