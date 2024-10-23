@@ -15,18 +15,32 @@ export class CartController {
   };
 
   getUserCar = async (req: Request, res: Response) => {
-    return res.json('getUserCar');
+    this.cartService
+      .getCartByUser(req.body.user)
+      .then((cart) => res.json(cart))
+      .catch((error) => this.handleError(error, res));
   };
 
   addProductToCar = async (req: Request, res: Response) => {
-    return res.json('addProductToCar');
+    const { user, productId, quantity } = req.body;
+    this.cartService
+      .addProductToCart(user, productId, quantity)
+      .then((cartItem) => res.json(cartItem))
+      .catch((error) => this.handleError(error, res));
   };
 
   updateCart = async (req: Request, res: Response) => {
-    return res.json('updateCart');
+    const { user, productId, newQuantity } = req.body;
+    this.cartService
+      .updateCart(user, productId, newQuantity)
+      .then((cartItem) => res.json(cartItem))
+      .catch((error) => this.handleError(error, res));
   };
 
   deleteProductFromCart = async (req: Request, res: Response) => {
-    return res.json('deleteProductFromCart');
+    this.cartService
+      .deleteProductFromCart(req.body.user, req.params.productId)
+      .then((result) => res.json(result))
+      .catch((error) => this.handleError(error, res));
   };
 }
