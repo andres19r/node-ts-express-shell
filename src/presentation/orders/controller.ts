@@ -15,7 +15,10 @@ export class OrderController {
   };
 
   findAll = async (req: Request, res: Response) => {
-    return res.json("findAll- Orders");
+    this.orderService
+      .findOrdersByUser(req.body.user)
+      .then((orders) => res.json(orders))
+      .catch((error) => this.handleError(error, res));
   };
 
   findById = async (req: Request, res: Response) => {
@@ -23,7 +26,11 @@ export class OrderController {
   };
 
   create = async (req: Request, res: Response) => {
-    return res.json("create - order");
+    const { user, paymentMethod, shippingAddress } = req.body;
+    this.orderService
+      .createOrder(user, paymentMethod, shippingAddress)
+      .then((orders) => res.json(orders))
+      .catch((error) => this.handleError(error, res));
   };
 
   update = async (req: Request, res: Response) => {
