@@ -1,5 +1,6 @@
 import { JwtAdapter, bcryptAdapter, envs } from "../../config";
 import { UserModel } from "../../data";
+import { CartModel } from "../../data/mongo/models/cart.model";
 import {
   CustomError,
   LoginUserDto,
@@ -17,11 +18,14 @@ export class AuthService {
 
     try {
       const user = new UserModel(registerUserDto);
+      const userCart = new CartModel();
+      userCart.user = user.id;
 
       // Encript password
       user.password = bcryptAdapter.hash(registerUserDto.password);
 
       await user.save();
+      await userCart.save();
 
       // Confirmation email
       this.sendEmailValidationLink(user.email);
