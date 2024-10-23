@@ -8,19 +8,19 @@ const productSchema = new mongoose.Schema({
   },
   available: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   price: {
     type: Number,
     default: 0,
   },
+  stock: {
+    type: Number,
+    default: 0,
+  },
   description: {
     type: String,
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+    default: "",
   },
   category: {
     type: Schema.Types.ObjectId,

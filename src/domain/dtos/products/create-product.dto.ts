@@ -5,17 +5,15 @@ export class CreateProductDto {
     public readonly name: string,
     public readonly available: boolean,
     public readonly price: number,
+    public readonly stock: number,
     public readonly description: string,
-    public readonly user: string, // id
     public readonly category: string, // id
   ) {}
 
   static create(props: { [key: string]: any }): [string?, CreateProductDto?] {
-    const { name, available, price, description, user, category } = props;
+    const { name, available, price, stock, description, category } = props;
     if (!name) return ["Missing name"];
-    if (!user) return ["Missing user"];
     if (!category) return ["Missing category"];
-    if (!Validators.isMongoID(user)) return ["Invalid User ID"];
     if (!Validators.isMongoID(category)) return ["Invalid Category ID"];
 
     return [
@@ -24,8 +22,8 @@ export class CreateProductDto {
         name,
         !!available,
         price,
+        stock,
         description,
-        user,
         category,
       ),
     ];

@@ -11,9 +11,7 @@ export class ProductService {
     if (productExists) throw CustomError.badRequest("Product already exists");
 
     try {
-      const product = new ProductModel({
-        ...createProductDto,
-      });
+      const product = new ProductModel(createProductDto);
       await product.save();
 
       return product;
@@ -31,8 +29,7 @@ export class ProductService {
         ProductModel.find()
           .skip((page - 1) * limit)
           .limit(limit)
-          .populate("user")
-          .populate("category", "name email"),
+          .populate("category"),
       ]);
       return {
         page,
