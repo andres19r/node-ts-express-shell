@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 
-const cartItemSchema = new mongoose.Schema({
-  cart: {
+const orderItemSchema = new mongoose.Schema({
+  order: {
     type: Schema.Types.ObjectId,
-    ref: "Cart",
+    ref: "Order",
     required: true,
   },
   product: {
@@ -13,19 +13,19 @@ const cartItemSchema = new mongoose.Schema({
   },
   quantity: {
     type: Number,
-    required: [true, "Quantity is required"],
+    default: 0,
   },
   price: {
     type: Number,
     default: 0,
   },
-  addedAt: {
-    type: Date,
-    default: Date.now,
+  total: {
+    type: Number,
+    default: 0,
   },
 });
 
-cartItemSchema.set("toJSON", {
+orderItemSchema.set("toJSON", {
   virtuals: true,
   versionKey: false,
   transform: function (doc, ret, options) {
@@ -33,4 +33,4 @@ cartItemSchema.set("toJSON", {
   },
 });
 
-export const CartItemModel = mongoose.model("CartItem", cartItemSchema);
+export const OrderItemModel = mongoose.model("OrderItem", orderItemSchema);
