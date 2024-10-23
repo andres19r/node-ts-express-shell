@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const categorySchema = new mongoose.Schema({
   name: {
@@ -8,12 +8,11 @@ const categorySchema = new mongoose.Schema({
   },
   available: {
     type: Boolean,
-    default: false,
+    default: true,
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+  description: {
+    type: String,
+    default: "",
   },
 });
 
