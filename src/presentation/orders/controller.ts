@@ -16,13 +16,16 @@ export class OrderController {
 
   findAll = async (req: Request, res: Response) => {
     this.orderService
-      .findOrdersByUser(req.body.user)
+      .findUserOrders(req.body.user)
       .then((orders) => res.json(orders))
       .catch((error) => this.handleError(error, res));
   };
 
   findById = async (req: Request, res: Response) => {
-    return res.json("findById - Order");
+    this.orderService
+      .findUserOrderById(req.body.user, req.params.id)
+      .then((order) => res.json(order))
+      .catch((error) => this.handleError(error, res));
   };
 
   create = async (req: Request, res: Response) => {
@@ -34,10 +37,17 @@ export class OrderController {
   };
 
   update = async (req: Request, res: Response) => {
-    return res.json("update - order");
+    const { status } = req.body;
+    this.orderService
+      .modifyOrder(status, req.params.id)
+      .then((orders) => res.json(orders))
+      .catch((error) => this.handleError(error, res));
   };
 
   delete = async (req: Request, res: Response) => {
-    return res.json("delete - order");
+    this.orderService
+      .cancelOrder(req.body.user, req.params.id)
+      .then((orders) => res.json(orders))
+      .catch((error) => this.handleError(error, res));
   };
 }

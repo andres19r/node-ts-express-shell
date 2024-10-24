@@ -7,7 +7,7 @@ import { CustomError, UserEntity } from "../../domain";
 export class OrderService {
   constructor() {}
 
-  public async findOrdersByUser(user: UserEntity) {
+  public async findUserOrders(user: UserEntity) {
     const orders = await OrderModel.find({ user: user.id });
     if (!orders)
       throw CustomError.badRequest(`Order not found with userId ${user.id}`);
@@ -63,6 +63,46 @@ export class OrderService {
         order,
         orderItems,
       };
+    } catch (error) {
+      throw CustomError.internalServer(`${error}`);
+    }
+  }
+
+  public async findUserOrderById(user: UserEntity, orderId: string) {
+    const order = await OrderModel.findOne({ user: user.id, _id: orderId });
+    if (!order) throw CustomError.badRequest("Order not found");
+
+    const orderItems = await OrderItemModel.find({ order });
+
+    return {
+      order,
+      items: orderItems,
+    };
+  }
+
+  public async modifyOrder(newStatus: string, orderId: string) {
+    const order = await OrderModel.findById(orderId);
+    if (!order)
+      throw CustomError.badRequest(`Order with id ${orderId} not found`);
+
+    try {
+      order.status = newStatus;
+      order.save();
+      return order;
+    } catch (error) {
+      throw CustomError.internalServer(`${error}`);
+    }
+  }
+
+  public async cancelOrder(user: UserEntity, orderId: string) {
+    const order = await OrderModel.findOne({ user: user.id, _id: orderId });
+    if (!order)
+      throw CustomError.badRequest(`Order with id ${orderId} not found`);
+
+    try {
+      order.status = "cancelled";
+      order.save();
+      return order;
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }
