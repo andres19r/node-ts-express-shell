@@ -1,4 +1,4 @@
-import { CategoryModel } from "../../data";
+import { CategoryModel, ProductModel } from "../../data";
 import { CreateCategoryDto, CustomError, PaginationDto } from "../../domain";
 
 export class CategoryService {
@@ -38,6 +38,20 @@ export class CategoryService {
           .skip((page - 1) * limit)
           .limit(limit),
       ]);
+      const categoriesResponse = await Promise.all(
+        categories.map(async (category) => {
+          const products = await ProductModel.find({ category: category.id });
+          return {
+            category: {
+              id: category.id,
+              name: category.name,
+              available: category.available,
+              description: category.description,
+              products,
+            },
+          };
+        }),
+      );
       return {
         page,
         limit,
@@ -47,12 +61,7 @@ export class CategoryService {
           page - 1 > 0
             ? `/api/categories?page=${page - 1}&limit=${limit}`
             : null,
-        categories: categories.map((category) => ({
-          id: category.id,
-          name: category.name,
-          available: category.available,
-          description: category.description,
-        })),
+        categories: categoriesResponse,
       };
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
