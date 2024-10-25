@@ -35,6 +35,7 @@ export class CartService {
       const cartItem = new CartItemModel({
         cart: cart.id,
         product: product.id,
+        productName: product.name,
         quantity,
         price: product.price,
         addedAt: new Date(),
