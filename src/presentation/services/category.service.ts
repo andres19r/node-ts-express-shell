@@ -12,7 +12,7 @@ export class CategoryService {
 
     try {
       const category = new CategoryModel(createCategoryDto);
-      await category.save();
+      // await category.save();
       return {
         id: category.id,
         name: category.name,

@@ -12,7 +12,8 @@ export class ProductService {
 
     try {
       const product = new ProductModel(createProductDto);
-      await product.save();
+      console.log(product);
+      // await product.save();
 
       return product;
     } catch (error) {
