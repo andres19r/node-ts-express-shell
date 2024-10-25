@@ -20,7 +20,7 @@ export class AuthRoutes {
 
     router.post("/login", controller.loginUser);
     router.post("/register", controller.registerUser);
-    router.post(
+    router.get(
       "/refresh",
       [AuthMiddleware.validateJWT],
       controller.refreshToken,
