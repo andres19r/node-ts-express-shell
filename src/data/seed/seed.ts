@@ -5,53 +5,73 @@ import {
   ProductModel,
   UserModel,
 } from "../mongo";
+import { CartItemModel } from "../mongo/models/cart-item.model";
+import { CartModel } from "../mongo/models/cart.model";
+import { OrderItemModel } from "../mongo/models/order-item.model";
+import { OrderModel } from "../mongo/models/order.model";
 import { seedData } from "./data";
+
+interface SeedCategory {
+  name: string;
+  description: string;
+}
+
+interface SeedProduct {
+  name: string;
+  price: number;
+  stock: number;
+  description: string;
+  img: string;
+  category: string;
+}
 
 (async () => {
   await MongoDatabase.connect({
     dbName: envs.MONGO_DB_NAME,
     mongoUrl: envs.MONGO_URL,
   });
-  await main();
+  await executeSeed();
 
   await MongoDatabase.disconnect();
 })();
 
-const randomBetween0AndX = (x: number) => {
-  return Math.floor(Math.random() * x);
-};
-
-async function main() {
-  // 0. Delete everything
+export async function executeSeed() {
+  // 1. Delete everything
   await Promise.all([
     UserModel.deleteMany(),
     CategoryModel.deleteMany(),
     ProductModel.deleteMany(),
+    CartModel.deleteMany(),
+    CartItemModel.deleteMany(),
+    OrderModel.deleteMany(),
+    OrderItemModel.deleteMany(),
   ]);
-
-  // 1. Create users
-  const users = await UserModel.insertMany(seedData.users);
 
   // 2. Create categories
   const categories = await CategoryModel.insertMany(
-    seedData.categories.map((category) => {
-      return {
-        ...category,
-        user: users[randomBetween0AndX(seedData.users.length - 1)]._id,
-      };
-    }),
+    seedData.categories.map((category: SeedCategory) => ({
+      name: category.name,
+      description: category.description,
+    })),
   );
 
+  const categoryMap: { [key: string]: string } = categories.reduce(
+    (acc: { [key: string]: string }, category: any) => {
+      acc[category.name] = category._id.toString(); // Convertir a string para evitar errores de tipo
+      return acc;
+    },
+    {},
+  );
   // 3. Create products
   const products = await ProductModel.insertMany(
-    seedData.products.map((product) => {
-      return {
-        ...product,
-        user: users[randomBetween0AndX(seedData.users.length - 1)]._id,
-        category:
-          categories[randomBetween0AndX(seedData.categories.length - 1)]._id,
-      };
-    }),
+    seedData.products.map((product: SeedProduct) => ({
+      name: product.name,
+      price: product.price,
+      stock: product.stock,
+      description: product.description,
+      img: product.img,
+      category: categoryMap[product.category], // Usar el ID correcto de la categoría
+    })),
   );
   console.log("Database seeded");
 }

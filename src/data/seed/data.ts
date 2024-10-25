@@ -1,218 +1,164 @@
 import { bcryptAdapter } from "../../config";
 
 export const seedData = {
-  users: [
-    {
-      name: "Test 1",
-      email: "test1@google.com",
-      password: bcryptAdapter.hash("123456"),
-    },
-    {
-      name: "Test 2",
-      email: "test2@google.com",
-      password: bcryptAdapter.hash("123456"),
-    },
-    {
-      name: "Test 3",
-      email: "test3@google.com",
-      password: bcryptAdapter.hash("123456"),
-    },
-    {
-      name: "Test 4",
-      email: "test4@google.com",
-      password: bcryptAdapter.hash("123456"),
-    },
-    {
-      name: "Test 5",
-      email: "test5@google.com",
-      password: bcryptAdapter.hash("123456"),
-    },
-    {
-      name: "Test 6",
-      email: "test6@google.com",
-      password: bcryptAdapter.hash("123456"),
-    },
-  ],
-
   categories: [
-    { name: "Driven" },
-    { name: "Till" },
-    { name: "Shout" },
-    { name: "Distance" },
-    { name: "Became" },
-    { name: "Chapter" },
-    { name: "Syllable" },
-    { name: "Arm" },
-    { name: "Guard" },
-    { name: "Perfectly" },
-    { name: "Expect" },
-    { name: "Hardly" },
-    { name: "anyone" },
-    { name: "vessels" },
-    { name: "angle" },
-    { name: "degree" },
-    { name: "split" },
-    { name: "would" },
-    { name: "kitchen" },
-    { name: "planned" },
-    { name: "combination" },
-    { name: "felt" },
+    {
+      name: "Pasteles",
+      description:
+        "Variedad de pasteles de crema, chocolate, vainilla y frutilla",
+    },
+    {
+      name: "Licuados",
+      description:
+        "Bebidas saludables hechas con frutas frescas y otros ingredientes nutritivos",
+    },
+    {
+      name: "Masas",
+      description:
+        "Productos de repostería como galletas, panqueques y queques",
+    },
+    {
+      name: "Té, Café y Jugos",
+      description:
+        "Bebidas calientes y frías, incluyendo tés, cafés y jugos naturales",
+    },
   ],
-
   products: [
     {
-      name: "Than",
-      available: true,
-      price: 75.0369,
-      descripcion:
-        "daughter me move thumb claws lose supper strip animal teach additional definition why pitch help thus boy like every mud month are account dozen",
+      name: "Pastel de Crema",
+      price: 25.0,
+      stock: 50,
+      description:
+        "Pastel con relleno de mermelada de frutilla, glaseado de crema, durazno y frutilla",
+      img: "pastel_de_crema",
+      category: "Pasteles",
     },
     {
-      name: "Wagon",
-      available: true,
-      price: 1.9631,
-      descripcion:
-        "actual difficult nature yellow smile captain nervous to cause wolf strong neck fifteen wrote consider visit likely happened rear red review wash flag parent",
+      name: "Pastel de Chocolate",
+      price: 30.0,
+      stock: 40,
+      description:
+        "Pastel con relleno de mermelada de frutilla, glaseado de crema y cubierta de chocolate",
+      img: "pastel_de_chocolate",
+      category: "Pasteles",
     },
     {
-      name: "Tone",
-      available: true,
-      price: 11.0312,
-      descripcion:
-        "met certain specific detail deeply red forth tiny whatever what image parts deer difficulty pair mixture trouble forgotten fort dry listen strength got seldom",
+      name: "Pastel de Vainilla",
+      price: 28.0,
+      stock: 45,
+      description:
+        "Pastel con relleno de mermelada de frutilla, glaseado de crema y cubierta de vainilla",
+      img: "pastel_de_vainilla",
+      category: "Pasteles",
     },
     {
-      name: "Song",
-      available: true,
-      price: 99.2314,
-      descripcion:
-        "look board flat river solve spite universe history use pool frequently twenty basic lying this came poetry particular function previous suit west shore tomorrow",
+      name: "Pastel de Frutilla",
+      price: 30.0,
+      stock: 35,
+      description:
+        "Pastel con relleno de mermelada de frutilla, glaseado de crema y retazos de durazno",
+      img: "pastel_de_frutilla",
+      category: "Pasteles",
     },
     {
-      name: "Plenty",
-      available: true,
-      price: 75.4476,
-      descripcion:
-        "dinner welcome screen expression structure plastic doubt missing thank garage property particular park syllable slide cup alphabet swimming stood fought fog shut spite ever",
+      name: "Licuado de Plátano",
+      price: 10.0,
+      stock: 60,
+      description: "Licuado con leche, plátano, chía y pedazos de plátano",
+      img: "licuado_de_platano",
+      category: "Licuados",
     },
     {
-      name: "Season",
-      available: false,
-      price: 91.6254,
-      descripcion:
-        "canal promised split headed studying had declared vessels hello matter lovely congress birthday fed word street happened ought cold heavy cage shoulder sight applied",
+      name: "Licuado de Frutilla",
+      price: 12.0,
+      stock: 55,
+      description: "Licuado con frutilla, plátano, chía y pedazos de frutilla",
+      img: "licuado_de_frutilla",
+      category: "Licuados",
     },
     {
-      name: "Voyage",
-      available: true,
-      price: 84.0274,
-      descripcion:
-        "reach myself owner building anyway tool dance particles branch shadow clear home of grass rabbit wind bit barn slipped husband recent tongue important zero",
+      name: "Licuado de Papaya",
+      price: 10.0,
+      stock: 50,
+      description: "Licuado con papaya, plátano, chía y pedazos de manzana",
+      img: "licuado_de_papaya",
+      category: "Licuados",
     },
     {
-      name: "Medicine",
-      available: true,
-      price: 38.1478,
-      descripcion:
-        "mountain five art moving foot roll harder lucky pitch mile nails married finally spend adult left storm easy cry increase cook drew announced glad",
+      name: "Licuado Multivitamínico",
+      price: 15.0,
+      stock: 40,
+      description:
+        "Licuado con vitamina C, jugo de naranja, manzana verde, chía y avena",
+      img: "licuado_multivitaminico",
+      category: "Licuados",
     },
     {
-      name: "How",
-      available: true,
-      price: 47.5355,
-      descripcion:
-        "heat student highway very word health them feel off cover trail cage went mission ice safety disease observe copy flat speech experiment now finest",
+      name: "Galletas",
+      price: 8.0,
+      stock: 70,
+      description:
+        "Galletas con masa de almendra, leche de almendras y ralladura de coco",
+      img: "galletas",
+      category: "Masas",
     },
     {
-      name: "Saved",
-      available: true,
-      price: 75.9318,
-      descripcion:
-        "weather mud friend brother breakfast corn prevent numeral deer quiet so name fastened tongue sing phrase concerned tree pass flies fighting chapter fence act",
+      name: "Panqueques",
+      price: 10.0,
+      stock: 50,
+      description:
+        "Panqueques con masa base, plátano, dulce de albaricoque y miel",
+      img: "panqueques",
+      category: "Masas",
     },
     {
-      name: "High",
-      available: true,
-      price: 90.1331,
-      descripcion:
-        "went split establish speak origin itself news when cross stand value vertical decide bicycle tone are market view depth income touch above nation spread",
+      name: "Queque de Plátano",
+      price: 15.0,
+      stock: 45,
+      description:
+        "Queque hecho con masa de plátano, esencia de vainilla y chispas de chocolate",
+      img: "queque_de_platano",
+      category: "Masas",
     },
     {
-      name: "Colony",
-      available: true,
-      price: 27.3687,
-      descripcion:
-        "jungle weight whether printed west egg run cut rod football fewer trouble hearing him been note select our shelf afraid jump alike slip shore",
+      name: "Queque Marmolado",
+      price: 180,
+      stock: 40,
+      description: "Queque con masa de chocolate y vainilla",
+      img: "queque_marmolado",
+      category: "Masas",
     },
     {
-      name: "Dozen",
-      available: false,
-      price: 63.9702,
-      descripcion:
-        "tobacco spent congress who accept pond outline changing flow find cat mirror tax keep twenty yellow into pile reach move plan recall nervous gold",
+      name: "Té de Manzanilla",
+      price: 5.0,
+      stock: 80,
+      description: "Infusión relajante de manzanilla",
+      img: "te_de_manzanilla",
+      category: "Té, Café y Jugos",
     },
     {
-      name: "Bean",
-      available: true,
-      price: 44.1797,
-      descripcion:
-        "direct might am golden block seat birth television taught twenty clock process safety shirt guard control cent follow couple eleven weather location turn parent",
+      name: "Té de Naranja",
+      price: 6.0,
+      stock: 75,
+      description: "Infusión refrescante de naranja",
+      img: "te_de_naranja",
+      category: "Té, Café y Jugos",
     },
     {
-      name: "Pain",
-      available: true,
-      price: 74.0199,
-      descripcion:
-        "start difficult two force source job process tomorrow machinery physical loose five fruit leaving century ourselves difference for frog throughout bridge atomic sunlight send",
+      name: "Té de Menta",
+      price: 5.0,
+      stock: 70,
+      description: "Infusión de menta, ideal para relajarse",
+      img: "te_de_menta",
+      category: "Té, Café y Jugos",
     },
     {
-      name: "Clearly",
-      available: true,
-      price: 8.6356,
-      descripcion:
-        "well poem little but therefore instant tight outline foreign drove characteristic mine leader cold close club satellites quiet face tobacco age gas bend push",
-    },
-    {
-      name: "Immediately",
-      available: true,
-      price: 41.4278,
-      descripcion:
-        "feel shot fill square caught would valley path whispered come porch function pocket fish division think same sign was adventure worry bean wealth realize",
-    },
-    {
-      name: "Sent",
-      available: false,
-      price: 95.3915,
-      descripcion:
-        "shut cookies goes serious several change poet principle play congress begun mill composition unless piece negative expect ancient milk shall house period stranger eight",
-    },
-    {
-      name: "Globe",
-      available: true,
-      price: 32.7184,
-      descripcion:
-        "saw clean golden brick shot brave percent damage eight chain young tears religious stems speak element example eager busy satellites pain fast operation person",
-    },
-    {
-      name: "Battle",
-      available: true,
-      price: 53.4763,
-      descripcion:
-        "his prevent sight camera ring generally glad refused among group nervous cave box rate breath somehow whether gate plant related citizen even yellow after",
-    },
-    {
-      name: "Elephant",
-      available: true,
-      price: 42.5209,
-      descripcion:
-        "ocean pink smell cent globe shot trouble guard troops swing sat hat back softly smaller direction seen jar strike union language off cookies serious",
-    },
-    {
-      name: "Special",
-      available: true,
-      price: 85.0522,
-      descripcion:
-        "slip front wrapped corner rose audience eat consider manufacturing swept seven yard sing purple industrial picture carbon social pole deal vowel slipped truck dozen",
+      name: "Café Americano",
+      price: 8.0,
+      stock: 60,
+      description: "Café americano, perfecto para las mañanas",
+      img: "cafe_americano",
+      category: "Té, Café y Jugos",
     },
   ],
 };

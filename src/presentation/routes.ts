@@ -6,6 +6,7 @@ import { FileUploadRoutes } from "./file-upload/routes";
 import { ImageRoutes } from "./images/routes";
 import { CartRoutes } from "./cart/routes";
 import { OrderRoutes } from "./orders/routes";
+import { SeedRoutes } from "./seed/routes";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -18,6 +19,8 @@ export class AppRoutes {
     router.use("/api/images", ImageRoutes.routes);
     router.use("/api/cart", CartRoutes.routes);
     router.use("/api/orders", OrderRoutes.routes);
+
+    router.use("/api/seed", SeedRoutes.routes);
 
     return router;
   }
