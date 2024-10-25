@@ -11,12 +11,12 @@ import { OrderItemModel } from "../mongo/models/order-item.model";
 import { OrderModel } from "../mongo/models/order.model";
 import { seedData } from "./data";
 
-interface SeedCategory {
+export interface SeedCategory {
   name: string;
   description: string;
 }
 
-interface SeedProduct {
+export interface SeedProduct {
   name: string;
   price: number;
   stock: number;
@@ -35,16 +35,16 @@ interface SeedProduct {
   await MongoDatabase.disconnect();
 })();
 
-export async function executeSeed() {
+async function executeSeed() {
   // 1. Delete everything
   await Promise.all([
-    UserModel.deleteMany(),
+    // UserModel.deleteMany(),
     CategoryModel.deleteMany(),
     ProductModel.deleteMany(),
-    CartModel.deleteMany(),
+    // CartModel.deleteMany(),
     CartItemModel.deleteMany(),
-    OrderModel.deleteMany(),
-    OrderItemModel.deleteMany(),
+    // OrderModel.deleteMany(),
+    // OrderItemModel.deleteMany(),
   ]);
 
   // 2. Create categories
@@ -57,11 +57,12 @@ export async function executeSeed() {
 
   const categoryMap: { [key: string]: string } = categories.reduce(
     (acc: { [key: string]: string }, category: any) => {
-      acc[category.name] = category._id.toString(); // Convertir a string para evitar errores de tipo
+      acc[category.name] = category._id.toString();
       return acc;
     },
     {},
   );
+
   // 3. Create products
   const products = await ProductModel.insertMany(
     seedData.products.map((product: SeedProduct) => ({
@@ -70,7 +71,7 @@ export async function executeSeed() {
       stock: product.stock,
       description: product.description,
       img: product.img,
-      category: categoryMap[product.category], // Usar el ID correcto de la categoría
+      category: categoryMap[product.category],
     })),
   );
   console.log("Database seeded");
