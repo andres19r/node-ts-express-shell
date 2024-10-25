@@ -24,22 +24,32 @@ export class CartService {
     quantity: number,
   ) {
     const { cart } = await this.getCartByUser(user);
-    const product = await ProductModel.findById(productId);
-    if (!product)
+    const productFound = await ProductModel.findById(productId);
+    if (!productFound)
       throw CustomError.badRequest(
         `Product with id ${productId} doesn't exist`,
       );
+
+    const cartItem = await CartItemModel.findOne({
+      cart,
+      product: productFound.id,
+    });
+    if (cartItem) {
+      cartItem.quantity += 1;
+      await cartItem.save();
+      return cartItem;
+    }
 
     try {
       cart.updatedAt = new Date();
       const cartItem = new CartItemModel({
         cart: cart.id,
-        product: product.id,
-        productName: product.name,
+        product: productFound.id,
+        productName: productFound.name,
         quantity,
-        price: product.price,
+        price: productFound.price,
         addedAt: new Date(),
-        img: product.img,
+        img: productFound.img,
       });
       await cart.save();
       await cartItem.save();
