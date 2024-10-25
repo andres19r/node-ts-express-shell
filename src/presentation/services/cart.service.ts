@@ -38,6 +38,7 @@ export class CartService {
         quantity,
         price: product.price,
         addedAt: new Date(),
+        img: product.img,
       });
       await cart.save();
       await cartItem.save();
@@ -84,7 +85,7 @@ export class CartService {
 
     try {
       await CartItemModel.findByIdAndDelete(cartItem.id);
-      return 'Product deleted from Cart';
+      return "Product deleted from Cart";
     } catch (error) {
       throw CustomError.internalServer(`${error}`);
     }

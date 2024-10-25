@@ -23,6 +23,9 @@ const cartItemSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  img: {
+    type: String,
+  },
 });
 
 cartItemSchema.set("toJSON", {
