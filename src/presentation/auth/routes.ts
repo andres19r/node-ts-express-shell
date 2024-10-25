@@ -2,6 +2,7 @@ import { Router } from "express";
 import { AuthController } from "./controller";
 import { EmailService, AuthService } from "../services";
 import { envs } from "../../config";
+import { AuthMiddleware } from "../middlewares/auth.middleware";
 
 export class AuthRoutes {
   static get routes(): Router {
@@ -19,6 +20,11 @@ export class AuthRoutes {
 
     router.post("/login", controller.loginUser);
     router.post("/register", controller.registerUser);
+    router.post(
+      "/refresh",
+      [AuthMiddleware.validateJWT],
+      controller.refreshToken,
+    );
 
     router.get("/validate-email/:token", controller.validateEmail);
 

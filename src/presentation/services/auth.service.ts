@@ -36,6 +36,7 @@ export class AuthService {
         email: user.email,
       });
       return {
+        ok: true,
         user: userEntity,
         token,
       };
@@ -62,6 +63,22 @@ export class AuthService {
     if (!token) throw CustomError.internalServer("Error while creating JWT");
 
     return {
+      ok: true,
+      user: userEntity,
+      token,
+    };
+  }
+
+  public async refreshToken(user: UserEntity) {
+    const userFound = await UserModel.findById(user.id);
+    if (!userFound) throw CustomError.badRequest("User not valid");
+    const token = await JwtAdapter.generateToken({
+      id: user.id,
+    });
+
+    const { password, ...userEntity } = UserEntity.fromObject(user);
+    return {
+      ok: true,
       user: userEntity,
       token,
     };
